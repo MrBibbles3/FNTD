@@ -98,46 +98,48 @@ window.onload = function() {
 };
 
 //Secret additon
-  let clickCount = 0;
-  let clickTimer;
+let clickCount = 0;
+let clickTimer;
 
-  // Preload 5 different sounds (adjust file names/paths as needed)
-  const clickSounds = [
-    new Audio('/sounds/I.mp3'),
-    new Audio('/sounds/ALWAYS.mp3'),
-    new Audio('/sounds/COME.mp3'),
-    new Audio('/sounds/BACK.mp3'),
-    new Audio('/sounds/YAY.mp3') // on 5th click
-  ];
+// Preload 5 different sounds (adjust file names/paths as needed)
+const clickSounds = [
+  new Audio('/sounds/click1.mp3'),
+  new Audio('/sounds/click2.mp3'),
+  new Audio('/sounds/click3.mp3'),
+  new Audio('/sounds/click4.mp3'),
+  new Audio('/sounds/magic-chime.mp3') // on 5th click
+];
 
-  const secretImage = document.querySelector('[data-id="237"]');
+// Target the wrapper with the classes mythic and raglan
+const secretImage = document.querySelector('.image-wrapper.mythic.raglan');
 
-  if (secretImage) {
-    secretImage.addEventListener('click', () => {
-      // Play sound based on click count
-      if (clickCount < clickSounds.length) {
-        const sound = clickSounds[clickCount];
-        sound.currentTime = 0;
-        sound.play();
-      }
+if (secretImage) {
+  secretImage.addEventListener('click', () => {
+    // Play the sound based on the current click count
+    if (clickCount < clickSounds.length) {
+      const sound = clickSounds[clickCount];
+      sound.currentTime = 0;
+      sound.play();
+    }
 
-      // Wobble animation
-      secretImage.classList.remove('wobble');
-      void secretImage.offsetWidth; // Force reflow
-      secretImage.classList.add('wobble');
+    // Wobble animation on the image
+    const image = secretImage.querySelector('img');
+    image.classList.remove('wobble');
+    void image.offsetWidth; // Force reflow (so the animation works)
+    image.classList.add('wobble');
 
-      // Count clicks
-      clickCount++;
+    // Increment click count
+    clickCount++;
 
-      // Reset timer after 10 seconds of no clicks
-      clearTimeout(clickTimer);
-      clickTimer = setTimeout(() => {
-        clickCount = 0;
-      }, 10000);
+    // Reset click count if user pauses for 10 seconds
+    clearTimeout(clickTimer);
+    clickTimer = setTimeout(() => {
+      clickCount = 0;
+    }, 10000);
 
-      // Trigger secret redirect on 5th click
-      if (clickCount >= 5) {
-        window.location.href = "/secret-page.html"; // Change this to your secret page
-      }
-    });
-  }
+    // Trigger secret redirect on the 5th click
+    if (clickCount >= 5) {
+      window.location.href = "/secret-page.html"; // Change this to your secret page
+    }
+  });
+}
