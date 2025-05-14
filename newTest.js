@@ -170,7 +170,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // 🎉 Trigger Confetti 🎉
                 launchConfetti();
                 setTimeout(() => {
-                window.open("ILoveSteveRaglanSoMuchIYKYK.html", "_blank"); 
+                window.open("ILoveSteveRaglanSoMuchIYKYK.html", "_self"); 
             }, 2000);
             }
         });
