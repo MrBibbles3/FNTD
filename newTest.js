@@ -5,6 +5,7 @@ const resetButton = document.getElementById('resetButton');
 const aboutToggle = document.getElementById('about-toggle');
 const aboutContent = document.getElementById('about-content');
 
+
 // Function to set the checked state
 function setChecked(img, checked) {
   const id = img.dataset.id;
@@ -97,49 +98,131 @@ window.onload = function() {
   };
 };
 
+
+
+
 //Secret additon
-let clickCount = 0;
-let clickTimer;
+document.addEventListener('DOMContentLoaded', () => {
+    const secretImage = document.querySelector('.image-wrapper.raglan');
+    const allCheckableImages = document.querySelectorAll('.checkable');
+    const canvas = document.getElementById('confettiCanvas');
+    const clickSounds = [
+        new Audio('/sounds/I.mp3'),
+        new Audio('/sounds/ALWAYS.mp3'),
+        new Audio('/sounds/COME.mp3'),
+        new Audio('/sounds/BACK.mp3'),
+        new Audio('/sounds/YAY.mp3')
+    ];
 
-// Preload 5 different sounds (adjust file names/paths as needed)
-const clickSounds = [
-  new Audio('/sounds/click1.mp3'),
-  new Audio('/sounds/click2.mp3'),
-  new Audio('/sounds/click3.mp3'),
-  new Audio('/sounds/click4.mp3'),
-  new Audio('/sounds/magic-chime.mp3') // on 5th click
-];
+    let clickCount = 0;
+    let clickTimer = null;
+    let soundQueue = [];
+    let isPlaying = false;
+    let confettiTriggered = false; // Prevent multiple confetti triggers
 
-// Target the wrapper with the classes mythic and raglan
-const secretImage = document.querySelector('.image-wrapper.mythic.raglan');
+    function playNextInQueue() {
+        if (soundQueue.length === 0) {
+            isPlaying = false;
+            return;
+        }
 
-if (secretImage) {
-  secretImage.addEventListener('click', () => {
-    // Play the sound based on the current click count
-    if (clickCount < clickSounds.length) {
-      const sound = clickSounds[clickCount];
-      sound.currentTime = 0;
-      sound.play();
+        const nextSound = soundQueue.shift();
+        isPlaying = true;
+        nextSound.currentTime = 0;
+        nextSound.play();
+        nextSound.onended = () => {
+            playNextInQueue();
+        };
     }
 
-    // Wobble animation on the image
-    const image = secretImage.querySelector('img');
-    image.classList.remove('wobble');
-    void image.offsetWidth; // Force reflow (so the animation works)
-    image.classList.add('wobble');
+    // 🎯 Secret Image Click
+    if (secretImage) {
+        secretImage.addEventListener('click', (event) => {
+            event.stopPropagation();
 
-    // Increment click count
-    clickCount++;
+            const image = secretImage.querySelector('img');
 
-    // Reset click count if user pauses for 10 seconds
-    clearTimeout(clickTimer);
-    clickTimer = setTimeout(() => {
-      clickCount = 0;
-    }, 10000);
+            image.classList.remove('wobble');
+            void image.offsetWidth;
+            image.classList.add('wobble');
 
-    // Trigger secret redirect on the 5th click
-    if (clickCount >= 5) {
-      window.location.href = "/secret-page.html"; // Change this to your secret page
+            if (clickCount < clickSounds.length) {
+                const sound = clickSounds[clickCount];
+                soundQueue.push(sound);
+
+                if (!isPlaying) {
+                    playNextInQueue();
+                }
+            }
+
+            clickCount++;
+            console.log(`Secret click count: ${clickCount}`);
+
+            clearTimeout(clickTimer);
+            clickTimer = setTimeout(() => {
+                console.log('Click sequence timed out!');
+                clickCount = 0;
+                soundQueue = [];
+                isPlaying = false;
+            }, 10000);
+
+            if (clickCount >= 5) {
+                // 🎉 Trigger Confetti 🎉
+                launchConfetti();
+            }
+        });
     }
-  });
-}
+
+    // ❌ Any OTHER image resets the sequence
+    allCheckableImages.forEach(img => {
+        const parentWrapper = img.closest('.image-wrapper');
+
+        if (!parentWrapper.classList.contains('raglan')) {
+            img.addEventListener('click', () => {
+                if (clickCount > 0) {
+                    console.log('Wrong image clicked! Sequence reset.');
+                    clickCount = 0;
+                    clearTimeout(clickTimer);
+                    soundQueue = [];
+                    isPlaying = false;
+                    confettiTriggered = false; // Reset confetti trigger
+
+                    parentWrapper.classList.add('wrong-click');
+                    setTimeout(() => {
+                        parentWrapper.classList.remove('wrong-click');
+                    }, 500);
+                }
+            });
+        }
+    });
+
+    // 🎉 Confetti Effect and Open Secret Page
+    function launchConfetti() {
+        if (!confettiTriggered) {
+            confettiTriggered = true; // Prevent multiple triggers of confetti
+            canvas.style.display = 'block'; // Show the canvas for confetti
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            // Launch Confetti
+            confetti.create(canvas, {
+                resize: true,
+                useWorker: true
+            })({
+                particleCount: 200,
+                spread: 160,
+                origin: { y: 0.6 }
+            });
+            setTimeout(() => {
+                window.open("/ILoveSteveRaglanSoMuchIYKYK.html", "_blank"); 
+            }, 2000);
+            // Open secret page in a new tab
+            
+
+            // Hide canvas after confetti is done
+            setTimeout(() => {
+                canvas.style.display = 'none'; // Hide canvas again after confetti
+            }, 3000); // Adjust time based on how long you want the confetti to show
+        }
+    }
+});

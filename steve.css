@@ -1,0 +1,142 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+  font-family: sans-serif;
+}
+
+.easter-egg-page {
+  position: relative;
+  background-color: black;
+}
+
+.gif-grid-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+}
+
+.bg-gif {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.center-column {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none; /* So background clicks can still work if needed */
+  text-align: center;
+}
+
+
+.steve-title {
+  font-size: 5rem;
+  font-weight: 900;
+  color: hotpink;
+  font-family: 'Comic Sans MS', 'Brush Script MT', cursive, sans-serif;
+  text-shadow:
+    -3px -3px 0 white,
+     3px -3px 0 white,
+    -3px  3px 0 white,
+     3px  3px 0 white,
+     0px  0px 20px deeppink;
+  margin: 1.5rem 0;
+  pointer-events: auto;
+  letter-spacing: 2px;
+  animation: sparkle 2s infinite alternate;
+}
+
+@keyframes sparkle {
+  from {
+    text-shadow:
+      -3px -3px 0 white,
+       3px -3px 0 white,
+      -3px  3px 0 white,
+       3px  3px 0 white,
+       0 0 10px hotpink;
+  }
+  to {
+    text-shadow:
+      -3px -3px 0 white,
+       3px -3px 0 white,
+      -3px  3px 0 white,
+       3px  3px 0 white,
+       0 0 30px deeppink;
+  }
+}
+
+.steve-bottom-gifs {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  pointer-events: auto;
+  margin-top: 2rem;
+}
+
+.steve-bottom-gifs img {
+  width: 300px;
+  height: auto;
+  border: 5px solid hotpink;
+  border-radius: 20px;
+  box-shadow: 0 0 20px pink;
+  animation: bounce 3s infinite ease-in-out;
+}
+
+.steve-side-img {
+  width: 120px; /* Adjust size as needed */
+  height: auto;
+  border: 5px solid hotpink; /* Same pink border as gifs */
+  border-radius: 20px; /* Round the edges */
+  box-shadow: 0 0 20px pink; /* Glow effect similar to gifs */
+  animation: bounce 3s infinite ease-in-out; /* Bounce animation, same as top gif */
+  display: inline-block; /* Keeps images inline */
+  margin: 2rem 1rem; /* Space them out from the top and sides */
+}
+
+/* Apply to the top gif */
+.steve-top-gif { 
+  width: 350px; /* Slightly larger than bottom gifs */
+  height: auto;
+  border: 5px solid hotpink;
+  border-radius: 20px;
+  box-shadow: 0 0 20px pink;
+  animation: bounce 3s infinite ease-in-out; /* Bounce animation, same as side images */
+  display: block;
+  margin: 2rem auto 1rem auto; /* Center it */
+}
+
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+.steve-center-content {
+  height:100%;
+  transform-origin: center top;
+}
+
+
+.steve-images {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
