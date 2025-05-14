@@ -97,3 +97,47 @@ window.onload = function() {
   };
 };
 
+//Secret additon
+  let clickCount = 0;
+  let clickTimer;
+
+  // Preload 5 different sounds (adjust file names/paths as needed)
+  const clickSounds = [
+    new Audio('/sounds/I.mp3'),
+    new Audio('/sounds/ALWAYS.mp3'),
+    new Audio('/sounds/COME.mp3'),
+    new Audio('/sounds/BACK.mp3'),
+    new Audio('/sounds/YAY.mp3') // on 5th click
+  ];
+
+  const secretImage = document.querySelector('[data-id="237"]');
+
+  if (secretImage) {
+    secretImage.addEventListener('click', () => {
+      // Play sound based on click count
+      if (clickCount < clickSounds.length) {
+        const sound = clickSounds[clickCount];
+        sound.currentTime = 0;
+        sound.play();
+      }
+
+      // Wobble animation
+      secretImage.classList.remove('wobble');
+      void secretImage.offsetWidth; // Force reflow
+      secretImage.classList.add('wobble');
+
+      // Count clicks
+      clickCount++;
+
+      // Reset timer after 10 seconds of no clicks
+      clearTimeout(clickTimer);
+      clickTimer = setTimeout(() => {
+        clickCount = 0;
+      }, 10000);
+
+      // Trigger secret redirect on 5th click
+      if (clickCount >= 5) {
+        window.location.href = "/secret-page.html"; // Change this to your secret page
+      }
+    });
+  }
