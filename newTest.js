@@ -169,6 +169,9 @@ document.addEventListener('DOMContentLoaded', () => {
             if (clickCount >= 5) {
                 // 🎉 Trigger Confetti 🎉
                 launchConfetti();
+                setTimeout(() => {
+                window.open("ILoveSteveRaglanSoMuchIYKYK.html", "_blank"); 
+            }, 2000);
             }
         });
     }
@@ -213,9 +216,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 spread: 160,
                 origin: { y: 0.6 }
             });
-            setTimeout(() => {
-                window.open("ILoveSteveRaglanSoMuchIYKYK.html", "_blank"); 
-            }, 2000);
+            
             // Open secret page in a new tab
             
 
