@@ -107,11 +107,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const allCheckableImages = document.querySelectorAll('.checkable');
     const canvas = document.getElementById('confettiCanvas');
     const clickSounds = [
-        new Audio('/sounds/I.mp3'),
-        new Audio('/sounds/ALWAYS.mp3'),
-        new Audio('/sounds/COME.mp3'),
-        new Audio('/sounds/BACK.mp3'),
-        new Audio('/sounds/YAY.mp3')
+        new Audio('sounds/I.mp3'),
+        new Audio('sounds/ALWAYS.mp3'),
+        new Audio('sounds/COME.mp3'),
+        new Audio('sounds/BACK.mp3'),
+        new Audio('sounds/YAY.mp3')
     ];
 
     let clickCount = 0;
