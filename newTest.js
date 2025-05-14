@@ -214,7 +214,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 origin: { y: 0.6 }
             });
             setTimeout(() => {
-                window.open("/ILoveSteveRaglanSoMuchIYKYK.html", "_blank"); 
+                window.open("ILoveSteveRaglanSoMuchIYKYK.html", "_blank"); 
             }, 2000);
             // Open secret page in a new tab
             
