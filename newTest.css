@@ -125,6 +125,22 @@ h1 {
   gap: 10px;
 }
 
+.header-intro-google {
+  display: inline-block;
+  text-align: center;
+  
+  color: #ffffff; 
+  
+  
+  font-size: 16px; 
+}
+
+.center-header-google {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
 .center-header2 {
   display: flex;
   justify-content: center;
@@ -192,6 +208,8 @@ h1 {
   border-radius: 8px; 
   font-size: 24px; 
 }
+
+
 
 .intro {
   text-align: center;
