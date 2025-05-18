@@ -115,7 +115,7 @@ function applyChecklistState(state) {
 // --- Load user checklist and merge with localStorage ---
 
 async function loadAndApplyUserChecklist() {
-  const firestoreState = await loadChecklistFromFirestore();
+  const firestoreState = await loadChecklistFromFirestore() || {};
   const localState = getLocalChecklistState();
 
   // Merge Firestore state over localStorage (Firestore wins on conflicts)
