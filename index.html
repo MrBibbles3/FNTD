@@ -20,6 +20,10 @@
                 <a href="indexShiny.html" class="nav-button">Shiny Units</a>
                 <button class="nav-button" data-toggle="credits-section">Credits</button>
                 <button class="nav-button" data-toggle="contact-section">Contact</button>
+                <button id="signInBtn">Sign in with Google</button>
+                <button id="signOutBtn" style="display:none;">Sign Out</button>
+                <div id="userStatus">Not signed in</div>
+                                
             </div>
 
             <div id="about-section" class="nav-section">
@@ -987,8 +991,13 @@
         </div>
     </div>
 
-  <script src="newTest.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+    <script src="newTest.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    
+
 
 </body>
 </html>
