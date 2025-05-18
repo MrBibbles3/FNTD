@@ -205,17 +205,29 @@ document.querySelectorAll('.nav-button[data-toggle]').forEach(button => {
     section.classList.toggle('show');
   });
 });
-
 const backToTopBtn = document.getElementById("backToTopBtn");
 if (backToTopBtn) {
   backToTopBtn.onclick = () => window.scrollTo({ top: 0, behavior: "smooth" });
 }
+
+const backToBottomBtn = document.getElementById("backToBottomBtn");
+if (backToBottomBtn) {
+  backToBottomBtn.onclick = () => window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+}
+
 window.onload = function() {
   const topMobile = document.getElementById("topMobile");
   if (topMobile) {
     topMobile.onclick = () => window.scrollTo({ top: 0, behavior: "smooth" });
+    console.log("help");
+  }
+
+  const bottomMobile = document.getElementById("bottomMobile");
+  if (bottomMobile) {
+    bottomMobile.onclick = () => window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
   }
 };
+
 
 // Secret easter egg code should come here unchanged...
 
