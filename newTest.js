@@ -141,6 +141,7 @@ function updateProgressCounterMobile() {
 
   const progressTextMobile = document.getElementById("progress-text-Mobile");
   const progressFillMobile = document.getElementById("progress-fill-Mobile");
+  const progressFillShinyMobile = document.getElementById("progress-fillShiny-Mobile");
 
   if (progressTextMobile) {
     progressTextMobile.textContent = `${checked}/${total}`;
@@ -149,6 +150,10 @@ function updateProgressCounterMobile() {
   if (progressFillMobile) {
     const percent = (checked / total) * 100;
     progressFillMobile.style.width = `${percent}%`;
+  }
+  if (progressFillShinyMobile) {
+    const percent = (checked / total) * 100;
+    progressFillShinyMobile.style.width = `${percent}%`;
   }
 }
 
