@@ -153,7 +153,7 @@ h1 {
 .back-to-top {
   position: fixed; /* Fix it to the bottom */
   bottom: 20px; /* 20px from the bottom */
-  right: 20px; /* 20px from the right */
+  left: 20px; /* 20px from the right */
   background-color: #3498db; /* Choose your color */
   color: white;
   border: none;
@@ -168,7 +168,7 @@ h1 {
 .back-to-bottom {
   position: fixed; /* Fix it to the bottom */
   bottom: 20px; /* 20px from the bottom */
-  right: 200px; /* 20px from the right */
+  right: 20px; /* 20px from the right */
   background-color: #3498db; /* Choose your color */
   color: white;
   border: none;
@@ -179,6 +179,74 @@ h1 {
   display: block; /* Always show it */
   transition: opacity 0.3s ease;
 }
+
+.progress-counter {
+  position: fixed;
+  bottom: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #222; /* Darker track */
+  color: white;
+  border: 5px solid black;
+  padding: 10px 0;
+  border-radius: 50px;
+  font-size: 18px;
+  width: 80%; /* Adjust width as needed */
+  max-width: 500px;
+  text-align: center;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+.progress-bar-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background-color: limegreen;
+  width: 0%;
+  z-index: 0;
+  transition: width 0.4s ease;
+  border-radius: 50px;
+}
+
+.progress-counterShiny {
+  position: fixed;
+  bottom: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #222; /* Darker track */
+  color: white;
+  border: 5px solid black;
+  padding: 10px 0;
+  border-radius: 50px;
+  font-size: 18px;
+  width: 80%; /* Adjust width as needed */
+  max-width: 500px;
+  text-align: center;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+.progress-bar-fillShiny {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: linear-gradient(
+    90deg, violet, blue, green, yellow, orange, red);
+  width: 0%;
+  z-index: 0;
+  transition: width 0.4s ease;
+  border-radius: 50px;
+}
+
+#progress-text {
+  position: relative;
+  z-index: 1;
+  font-weight: bold;
+}
+
 
 .back-to-top:hover {
   background: #2ecc71;
@@ -624,7 +692,7 @@ h1 {
 
     .back-to-top-Mobile {
       position: fixed; /* Fix it to the bottom */
-      bottom: 80px; /* 20px from the bottom */
+      bottom: 140px; /* 20px from the bottom */
       right: 20px; /* 20px from the right */
       background-color: #3498db; /* Choose your color */
       color: white;
@@ -639,7 +707,7 @@ h1 {
 
     .back-to-bottom-Mobile {
       position: fixed; /* Fix it to the bottom */
-      bottom: 20px; /* 20px from the bottom */
+      bottom: 80px; /* 20px from the bottom */
       right: 20px; /* 20px from the right */
       background-color: #3498db; /* Choose your color */
       color: white;
@@ -650,6 +718,101 @@ h1 {
       cursor: pointer;
       display: block; /* Always show it */
       transition: opacity 0.3s ease;
+    }
+
+    .progress-counter-MobileOLD {
+      position: fixed; 
+      bottom: 20px; 
+      left: 50%;
+      transform: translateX(-50%); 
+      background-color: #000000; /* Choose your color */
+      color: white;
+      border: none;
+      padding: 10px 130px;
+      border-radius: 50px;
+      font-size: 18px;
+      display: block; /* Always show it */
+      transition: opacity 0.3s ease;
+    }
+
+    .progress-counter-Mobile {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #222; /* Darker track */
+  color: white;
+  border: 5px solid black;
+  padding: 10px 0;
+  border-radius: 50px;
+  font-size: 18px;
+  width: 80%; /* Adjust width as needed */
+  max-width: 500px;
+  text-align: center;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+
+.progress-bar-fill-Mobile {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background-color: limegreen;
+  width: 0%;
+  z-index: 0;
+  transition: width 0.4s ease;
+  border-radius: 50px;
+}
+
+#progress-text-Mobile {
+  position: relative;
+  z-index: 1;
+  font-weight: bold;
+}
+
+  .progress-counterShiny-Mobile {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #222; /* Darker track */
+  color: white;
+  border: 5px solid black;
+  padding: 10px 0;
+  border-radius: 50px;
+  font-size: 18px;
+  width: 80%; /* Adjust width as needed */
+  max-width: 500px;
+  text-align: center;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+
+.progress-bar-fillShiny-Mobile {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background-color: limegreen;
+  width: 0%;
+  z-index: 0;
+  transition: width 0.4s ease;
+  border-radius: 50px;
+}
+
+#progress-text-Mobile {
+  position: relative;
+  z-index: 1;
+  font-weight: bold;
+}
+
+
+    .empty-Mobile{
+      display: block;
+      height: 100px;
     }
 
     .back-to-top-Mobile:hover {

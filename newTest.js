@@ -96,6 +96,65 @@ function getLocalChecklistState() {
   return state;
 }
 
+//progress bar try
+const progressCounter = document.getElementById('progress-counter');
+const totalUnits = images.length; // Or 300 if you want to hard-code
+
+function updateProgressCounter() {
+  const total = images.length;
+  let checked = 0;
+  images.forEach(img => {
+    if (img.classList.contains('checked')) {
+      checked++;
+    }
+  });
+
+  const progressText = document.getElementById("progress-text");
+  const progressFill = document.getElementById("progress-fill");
+  const progressFillShiny = document.getElementById("progress-fillShiny");
+
+  if (progressText) {
+    progressText.textContent = `${checked}/${total}`;
+  }
+
+  if (progressFill) {
+    const percent = (checked / total) * 100;
+    progressFill.style.width = `${percent}%`;
+  }
+  if (progressFillShiny) {
+    const percent = (checked / total) * 100;
+    progressFillShiny.style.width = `${percent}%`;
+  }
+  updateProgressCounterMobile();
+}
+
+const progressCounterMobile = document.getElementById('progress-counter-Mobile');
+
+function updateProgressCounterMobile() {
+  const total = images.length;
+  let checked = 0;
+  images.forEach(img => {
+    if (img.classList.contains('checked')) {
+      checked++;
+    }
+  });
+
+  const progressTextMobile = document.getElementById("progress-text-Mobile");
+  const progressFillMobile = document.getElementById("progress-fill-Mobile");
+
+  if (progressTextMobile) {
+    progressTextMobile.textContent = `${checked}/${total}`;
+  }
+
+  if (progressFillMobile) {
+    const percent = (checked / total) * 100;
+    progressFillMobile.style.width = `${percent}%`;
+  }
+}
+
+
+
+
 function applyChecklistState(state) {
   images.forEach(img => {
     const id = img.dataset.id;
@@ -110,6 +169,7 @@ function applyChecklistState(state) {
       localStorage.setItem(`checked-${id}`, "false");
     }
   });
+  updateProgressCounter();
 }
 
 // --- Load user checklist and merge with localStorage ---
@@ -136,6 +196,8 @@ function setupImageClickHandlers() {
       img.closest('.image-wrapper').classList.toggle('checked');
       localStorage.setItem(`checked-${id}`, isChecked ? 'true' : 'false');
 
+      updateProgressCounter();
+
       if (currentUser) {
         const updatedState = getLocalChecklistState();
         await saveChecklistToFirestore(updatedState);
@@ -152,6 +214,9 @@ function setupButtons() {
         img.closest('.image-wrapper').classList.add('checked');
         localStorage.setItem(`checked-${img.dataset.id}`, "true");
       });
+
+      updateProgressCounter();
+
       if (currentUser) {
         await saveChecklistToFirestore(getLocalChecklistState());
       }
@@ -165,6 +230,9 @@ function setupButtons() {
         img.closest('.image-wrapper').classList.add('checked');
         localStorage.setItem(`checked-${img.dataset.id}`, "true");
       });
+
+      updateProgressCounter();
+
       if (currentUser) {
         await saveChecklistToFirestore(getLocalChecklistState());
       }
@@ -178,6 +246,9 @@ function setupButtons() {
         img.closest('.image-wrapper').classList.remove('checked');
         localStorage.setItem(`checked-${img.dataset.id}`, "false");
       });
+
+      updateProgressCounter();
+
       if (currentUser) {
         await saveChecklistToFirestore(getLocalChecklistState());
       }
@@ -235,6 +306,7 @@ window.onload = function() {
 
 setupImageClickHandlers();
 setupButtons();
+updateProgressCounter();
 
 
 
