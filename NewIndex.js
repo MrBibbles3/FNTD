@@ -144,6 +144,8 @@ function setupAllImages() {
   // Update progress counters
   updateProgressCounter();
 
+  setupEasterEgg();
+
 }
 
 
@@ -453,18 +455,35 @@ window.onload = function() {
 
 
 // Secret easter egg code should come here unchanged...
-
-
-
-
-//Secret additon
+// Secret Easter Egg
 document.addEventListener('DOMContentLoaded', () => {
     
-  if (document.getElementById("ureUnits")) { loadUnits();}
-  else if (document.getElementById("sureUnits")) { loadShinyUnits();}
-    const secretImage = document.querySelector('.image-wrapper.raglan');
+    // Load the correct units
+    if (document.getElementById("ureUnits")) { 
+        loadUnits();
+    } else if (document.getElementById("sureUnits")) { 
+        loadShinyUnits();
+    }
+
+});
+
+
+// --- Easter Egg Setup ---
+function setupEasterEgg() {
+    // Determine the secret image ID based on page
+    const isShiny = !!document.getElementById("sureUnits");
+    const secretId = isShiny ? "s69" : "69"; // Shiny pages prefix with "s"
+    
+    // Find the secret image inside the Nightmare container
+    const secretImage = document.querySelector(`#nafUnits img.checkable[data-id="${secretId}"]`);
     const allCheckableImages = document.querySelectorAll('.checkable');
     const canvas = document.getElementById('confettiCanvas');
+
+    if (!secretImage) {
+        console.log('❌ Secret Steve Raglan image not found!');
+        return;
+    }
+
     const clickSounds = [
         new Audio('sounds/I.mp3'),
         new Audio('sounds/ALWAYS.mp3'),
@@ -477,113 +496,93 @@ document.addEventListener('DOMContentLoaded', () => {
     let clickTimer = null;
     let soundQueue = [];
     let isPlaying = false;
-    let confettiTriggered = false; // Prevent multiple confetti triggers
+    let confettiTriggered = false;
 
     function playNextInQueue() {
         if (soundQueue.length === 0) {
             isPlaying = false;
             return;
         }
-
         const nextSound = soundQueue.shift();
         isPlaying = true;
         nextSound.currentTime = 0;
         nextSound.play();
-        nextSound.onended = () => {
-            playNextInQueue();
-        };
+        nextSound.onended = () => playNextInQueue();
     }
 
-    // 🎯 Secret Image Click
-    if (secretImage) {
-        secretImage.addEventListener('click', (event) => {
-            event.stopPropagation();
+    // Secret image click
+    secretImage.addEventListener('click', (event) => {
+        event.stopPropagation();
 
-            const image = secretImage.querySelector('img');
+        const imageWrapper = secretImage.closest('.image-wrapper');
+        const image = secretImage;
 
-            image.classList.remove('wobble');
-            void image.offsetWidth;
-            image.classList.add('wobble');
+        // Wobble animation
+        image.classList.remove('wobble');
+        void image.offsetWidth;
+        image.classList.add('wobble');
 
-            if (clickCount < clickSounds.length) {
-                const sound = clickSounds[clickCount];
-                soundQueue.push(sound);
+        // Queue sounds
+        if (clickCount < clickSounds.length) {
+            const sound = clickSounds[clickCount];
+            soundQueue.push(sound);
+            if (!isPlaying) playNextInQueue();
+        }
 
-                if (!isPlaying) {
-                    playNextInQueue();
-                }
-            }
+        clickCount++;
+        console.log(`Secret click count: ${clickCount}`);
 
-            clickCount++;
-            console.log(`Secret click count: ${clickCount}`);
+        clearTimeout(clickTimer);
+        clickTimer = setTimeout(() => {
+            clickCount = 0;
+            soundQueue = [];
+            isPlaying = false;
+        }, 10000);
 
-            clearTimeout(clickTimer);
-            clickTimer = setTimeout(() => {
-                console.log('Click sequence timed out!');
-                clickCount = 0;
-                soundQueue = [];
-                isPlaying = false;
-            }, 10000);
-
-            if (clickCount >= 5) {
-                // 🎉 Trigger Confetti 🎉
-                launchConfetti();
-                setTimeout(() => {
-                window.open("ILoveSteveRaglanSoMuchIYKYK.html", "_self"); 
+        // Trigger confetti and secret page
+        if (clickCount >= 5 && !confettiTriggered) {
+            launchConfetti();
+            setTimeout(() => {
+                window.open("ILoveSteveRaglanSoMuchIYKYK.html", "_self");
             }, 2000);
-            }
-        });
-    }
+        }
+    });
 
-    // ❌ Any OTHER image resets the sequence
+    // Clicking any other image resets sequence
     allCheckableImages.forEach(img => {
-        const parentWrapper = img.closest('.image-wrapper');
-
-        if (!parentWrapper.classList.contains('raglan')) {
+        const wrapper = img.closest('.image-wrapper');
+        if (wrapper !== secretImage.closest('.image-wrapper')) {
             img.addEventListener('click', () => {
                 if (clickCount > 0) {
-                    console.log('Wrong image clicked! Sequence reset.');
                     clickCount = 0;
                     clearTimeout(clickTimer);
                     soundQueue = [];
                     isPlaying = false;
-                    confettiTriggered = false; // Reset confetti trigger
+                    confettiTriggered = false;
 
-                    parentWrapper.classList.add('wrong-click');
-                    setTimeout(() => {
-                        parentWrapper.classList.remove('wrong-click');
-                    }, 500);
+                    wrapper.classList.add('wrong-click');
+                    setTimeout(() => wrapper.classList.remove('wrong-click'), 500);
                 }
             });
         }
     });
 
-    // 🎉 Confetti Effect and Open Secret Page
     function launchConfetti() {
-        if (!confettiTriggered) {
-            confettiTriggered = true; // Prevent multiple triggers of confetti
-            canvas.style.display = 'block'; // Show the canvas for confetti
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
+        if (confettiTriggered) return;
+        confettiTriggered = true;
 
-            // Launch Confetti
-            confetti.create(canvas, {
-                resize: true,
-                useWorker: true
-            })({
-                particleCount: 200,
-                spread: 160,
-                origin: { y: 0.6 }
-            });
-            
-            // Open secret page in a new tab
-            
+        canvas.style.display = 'block';
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
 
-            // Hide canvas after confetti is done
-            setTimeout(() => {
-                canvas.style.display = 'none'; // Hide canvas again after confetti
-            }, 3000); // Adjust time based on how long you want the confetti to show
-        }
+        confetti.create(canvas, { resize: true, useWorker: true })({
+            particleCount: 200,
+            spread: 160,
+            origin: { y: 0.6 }
+        });
+
+        setTimeout(() => {
+            canvas.style.display = 'none';
+        }, 3000);
     }
-});
-
+}
