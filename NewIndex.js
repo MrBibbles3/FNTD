@@ -25,127 +25,134 @@ const userStatus = document.getElementById('userStatus'); // Element to show use
 let currentUser = null;
 
 // Set up the Website with New Grid Interface
+const prefixMap = {
+  uncommonUnits: "u",
+  rareUnits: "r",
+  epicUnits: "e",
+  mythicUnits: "m",
+  secretUnits: "s",
+  nightmareUnits: "n",
+  apexUnits: "a",
+  forgottenUnits: "f"
+};
 
-let totalUnits = 0;
-
+// -------------------- Load Units --------------------
 async function loadUnits() {
-    const response = await fetch("./data/units.json");
-    const unitsJSON = await response.json();
+  const response = await fetch("./data/units.json");
+  const unitsJSON = await response.json();
 
-    const allUnitGroups = [
-        { containerId: "ureUnits", groups: ["uncommonUnits", "rareUnits", "epicUnits"] },
-        { containerId: "msUnits", groups: ["mythicUnits", "secretUnits"] },
-        { containerId: "nafUnits", groups: ["nightmareUnits", "apexUnits", "forgottenUnits"] }
-    ];
+  const allUnitGroups = [
+    { containerId: "ureUnits", groups: ["uncommonUnits", "rareUnits", "epicUnits"] },
+    { containerId: "msUnits", groups: ["mythicUnits", "secretUnits"] },
+    { containerId: "nafUnits", groups: ["nightmareUnits", "apexUnits", "forgottenUnits"] }
+  ];
 
-    allUnitGroups.forEach(groupInfo => {
-        const container = document.getElementById(groupInfo.containerId);
-        groupInfo.groups.forEach(jsonGroupName => {
-            const units = unitsJSON[jsonGroupName];
-            if (!units) return;
+  allUnitGroups.forEach(groupInfo => {
+    const container = document.getElementById(groupInfo.containerId);
+    if (!container) return;
 
-            units.forEach(unit => {
-                const wrapper = document.createElement("div");
-                wrapper.className = `image-wrapper ${unit.class}`;
+    groupInfo.groups.forEach(jsonGroupName => {
+      const units = unitsJSON[jsonGroupName];
+      if (!units) return;
 
-                wrapper.innerHTML = `
-                  <img loading="lazy" src="./images/units/${unit.class.split(" ")[0]}/${unit.id}.webp"
-                      class="checkable" data-id="${unit.id}" data-rarity="${unit.class}">
-                  <svg class="tick" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M20 6L9 17l-5-5" stroke="black" stroke-width="5" fill="none"
-                            stroke-linecap="round" stroke-linejoin="round"/>
-                      <path d="M20 6L9 17l-5-5" stroke="limegreen" stroke-width="3" fill="none"
-                            stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                `;
+      const prefix = prefixMap[jsonGroupName] || "";
 
-                container.appendChild(wrapper);
-            });
-        });
+      units.forEach(unit => {
+        const uniqueId = prefix + unit.id;
+
+        const wrapper = document.createElement("div");
+        wrapper.className = `image-wrapper ${unit.class}`;
+
+        wrapper.innerHTML = `
+          <img loading="lazy"
+               src="./images/units/${unit.class.split(" ")[0]}/${unit.id}.webp"
+               class="checkable"
+               data-id="${uniqueId}"
+               data-rarity="${unit.class}">
+          <svg class="tick" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M20 6L9 17l-5-5" stroke="black" stroke-width="5" fill="none"
+                    stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M20 6L9 17l-5-5" stroke="limegreen" stroke-width="3" fill="none"
+                    stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        `;
+
+        container.appendChild(wrapper);
+      });
     });
-    
-    totalUnits = 0;
-    Object.values(unitsJSON).forEach(unitGroup => {
-    totalUnits += unitGroup.length;
-});
+  });
 
-    setupAllImages(); // after images exist
+  setupAllImages(); // after images exist
 }
 
+// -------------------- Load Shiny Units --------------------
 async function loadShinyUnits() {
-    const response = await fetch("./data/units.json");
-    const unitsJSON = await response.json();
+  const response = await fetch("./data/units.json");
+  const unitsJSON = await response.json();
 
-    const allShinyGroups = [
-        { containerId: "sureUnits", groups: ["uncommonUnits", "rareUnits", "epicUnits"] },
-        { containerId: "smsUnits", groups: ["mythicUnits", "secretUnits"] },
-        { containerId: "snafUnits", groups: ["nightmareUnits", "apexUnits", "forgottenUnits"] }
-    ];
+  const allShinyGroups = [
+    { containerId: "sureUnits", groups: ["uncommonUnits", "rareUnits", "epicUnits"] },
+    { containerId: "smsUnits", groups: ["mythicUnits", "secretUnits"] },
+    { containerId: "snafUnits", groups: ["nightmareUnits", "apexUnits", "forgottenUnits"] }
+  ];
 
-    allShinyGroups.forEach(groupInfo => {
-        const container = document.getElementById(groupInfo.containerId);
-        if (!container) return;
+  allShinyGroups.forEach(groupInfo => {
+    const container = document.getElementById(groupInfo.containerId);
+    if (!container) return;
 
-        groupInfo.groups.forEach(jsonGroupName => {
-            const units = unitsJSON[jsonGroupName];
-            if (!units) return;
+    groupInfo.groups.forEach(jsonGroupName => {
+      const units = unitsJSON[jsonGroupName];
+      if (!units) return;
 
-            units.forEach(unit => {
-                const wrapper = document.createElement("div");
-                wrapper.className = `image-wrapper ${unit.class} shiny`;
+      const prefix = "s" + (prefixMap[jsonGroupName] || ""); // add shiny 's' in front
 
-                wrapper.innerHTML = `
-                  <img loading="lazy" src="./images/units/${unit.class.split(" ")[0]}/${unit.id}.webp"
-                      class="checkable" data-id="shiny-${unit.id}" data-rarity="${unit.class}">
-                  <div class="sparkle"></div>
-                  <svg class="tick" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M20 6L9 17l-5-5" stroke="black" stroke-width="5" fill="none"
-                            stroke-linecap="round" stroke-linejoin="round"/>
-                      <path d="M20 6L9 17l-5-5" stroke="limegreen" stroke-width="3" fill="none"
-                            stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                `;
+      units.forEach(unit => {
+        const uniqueId = prefix + unit.id;
 
-                container.appendChild(wrapper);
-            });
-        });
+        const wrapper = document.createElement("div");
+        wrapper.className = `image-wrapper ${unit.class} shiny`;
+
+        wrapper.innerHTML = `
+          <img loading="lazy"
+               src="./images/units/${unit.class.split(" ")[0]}/${unit.id}.webp"
+               class="checkable"
+               data-id="${uniqueId}"
+               data-rarity="${unit.class}">
+          <div class="sparkle"></div>
+          <svg class="tick" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M20 6L9 17l-5-5" stroke="black" stroke-width="5" fill="none"
+                    stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M20 6L9 17l-5-5" stroke="limegreen" stroke-width="3" fill="none"
+                    stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        `;
+
+        container.appendChild(wrapper);
+      });
     });
+  });
 
-    totalUnits = 0;
-    Object.values(unitsJSON).forEach(unitGroup => {
-        totalUnits += unitGroup.length;
-    });
-
-    setupAllImages(); // after images exist
+  setupAllImages();
 }
 
-
-
-
-
-
-// More setup for new image system
-
+// -------------------- Setup Images & Progress --------------------
 function setupAllImages() {
-  // Query all images after the grid exists
   const images = document.querySelectorAll('.checkable');
-  
 
-
-  // Apply checklist state from localStorage/Firestore
+  // 1️⃣ Apply saved state
   applyChecklistState(getLocalChecklistState());
 
-  // Set up click handlers
+  // 2️⃣ Click handlers
   setupImageClickHandlers();
 
-  // Set up the buttons (check all, reset)
+  // 3️⃣ Buttons
   setupButtons();
 
-  // Update progress counters
+  // 4️⃣ Update progress bar
   updateProgressCounter();
 
+  // 5️⃣ Easter egg
   setupEasterEgg();
-
 }
 
 
@@ -225,54 +232,51 @@ function getLocalChecklistState() {
 //progress bar try
 const progressCounter = document.getElementById('progress-counter');
 
+// --- Update desktop progress bar ---
 function updateProgressCounter() {
-  const images = document.querySelectorAll('.checkable');
-  let checked = 0;
-  images.forEach(img => {
-    if (img.classList.contains('checked')) {
-      checked++;
-    }
-  });
+    const images = document.querySelectorAll('.checkable'); // all tickable images
+    const total = images.length;
+    let checked = 0;
 
-  const progressText = document.getElementById("progress-text");
-  const progressFill = document.getElementById("progress-fill");
-  const progressFillShiny = document.getElementById("progress-fillShiny");
+    images.forEach(img => {
+        if (img.classList.contains('checked')) checked++;
+    });
 
-  if (progressText) progressText.textContent = `${checked}/${totalUnits}`;
-  if (progressFill) progressFill.style.width = `${(checked / totalUnits) * 100}%`;
-  if (progressFillShiny) progressFillShiny.style.width = `${(checked / totalUnits) * 100}%`;
+    const progressText = document.getElementById("progress-text");
+    const progressFill = document.getElementById("progress-fill");
+    const progressFillShiny = document.getElementById("progress-fillShiny");
 
-  updateProgressCounterMobile();
+    const percent = (total > 0) ? (checked / total) * 100 : 0;
+
+    if (progressText) progressText.textContent = `${checked}/${total}`;
+    if (progressFill) progressFill.style.width = `${percent}%`;
+    if (progressFillShiny) progressFillShiny.style.width = `${percent}%`;
+
+    // update mobile version too
+    updateProgressCounterMobile();
 }
 
-const progressCounterMobile = document.getElementById('progress-counter-Mobile');
-
+// --- Update mobile progress bar ---
 function updateProgressCounterMobile() {
-  const images = document.querySelectorAll('.checkable');
-  let checked = 0;
-  images.forEach(img => {
-    if (img.classList.contains('checked')) {
-      checked++;
-    }
-  });
+    const images = document.querySelectorAll('.checkable');
+    const total = images.length;
+    let checked = 0;
 
-  const progressTextMobile = document.getElementById("progress-text-Mobile");
-  const progressFillMobile = document.getElementById("progress-fill-Mobile");
-  const progressFillShinyMobile = document.getElementById("progress-fillShiny-Mobile");
+    images.forEach(img => {
+        if (img.classList.contains('checked')) checked++;
+    });
 
-  if (progressTextMobile) {
-    progressTextMobile.textContent = `${checked}/${totalUnits}`;
-  }
+    const progressTextMobile = document.getElementById("progress-text-Mobile");
+    const progressFillMobile = document.getElementById("progress-fill-Mobile");
+    const progressFillShinyMobile = document.getElementById("progress-fillShiny-Mobile");
 
-  const percent = (checked / totalUnits) * 100;
+    const percent = (total > 0) ? (checked / total) * 100 : 0;
 
-  if (progressFillMobile) {
-    progressFillMobile.style.width = `${percent}%`;
-  }
-  if (progressFillShinyMobile) {
-    progressFillShinyMobile.style.width = `${percent}%`;
-  }
+    if (progressTextMobile) progressTextMobile.textContent = `${checked}/${total}`;
+    if (progressFillMobile) progressFillMobile.style.width = `${percent}%`;
+    if (progressFillShinyMobile) progressFillShinyMobile.style.width = `${percent}%`;    
 }
+
 
 
 
@@ -472,10 +476,10 @@ document.addEventListener('DOMContentLoaded', () => {
 function setupEasterEgg() {
     // Determine the secret image ID based on page
     const isShiny = !!document.getElementById("sureUnits");
-    const secretId = isShiny ? "s69" : "69"; // Shiny pages prefix with "s"
+    const secretId = isShiny ? "sn69" : "n69"; // Shiny pages prefix with "s"
     
     // Find the secret image inside the Nightmare container
-    const secretImage = document.querySelector(`#nafUnits img.checkable[data-id="${secretId}"]`);
+    const secretImage = document.querySelector(`img.checkable[data-id="${secretId}"]`);
     const allCheckableImages = document.querySelectorAll('.checkable');
     const canvas = document.getElementById('confettiCanvas');
 
