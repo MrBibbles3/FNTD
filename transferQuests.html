@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checklist Grid</title>
+    <link rel="stylesheet" href="NewIndex.css">
+</head>
+<body>
+    <canvas id="confettiCanvas"></canvas>
+    <div class="toplot">
+        <div class="center-header">
+            <h1 class="header-intro">MrBibble's Checklist!</h1>
+        </div>  
+
+        <div class="nav-wrapper">
+            <div class="nav-bar">
+                <button class="nav-button" data-toggle="about-section">About</button>
+                <a href="index.html" class="nav-button">Normal Units</a>
+                <a href="indexShiny.html" class="nav-button">Shiny Units</a>
+                <button class="nav-button" data-toggle="credits-section">Credits</button>
+                <button class="nav-button" data-toggle="contact-section">Contact</button>
+                <button id="signInBtn" class="nav-button">Sign in with Google</button>
+                <button id="signOutBtn" style="display:none;" class="nav-button">Sign Out</button>
+                <div class="center-header-google">
+                    <h1 id="userStatus" class="header-intro-google">Not signed in!</h1>
+                </div> 
+                </div>
+
+            <div id="about-section" class="nav-section">
+                <div class="nav-box"><p><b>Welcome to MrBibble's Checklist!!</b><br>
+                    <p style="max-width: 600px; margin: 0 auto; padding: 10px; font-size: 1rem; line-height: 1.5;"> 
+                        The units are sorted in rarity order, but do not follow any specific order otherwise.
+                        As I do this for fun on the side, new units may not appear for a day or 2 after a new update!<br><br>
+                        <b>Here are some features I've included:</b><br>
+                        -- Your progress will be saved to your device.<br>
+                        -- Evolutions are listed after their first unit for easy access, and have a glowing border!<br>
+                        -- Please <b>BE CAREFUL</b> of the <b>Tick All</b> and <b>Reset All</b> buttons! <span style="color: red;font-weight: bold;">You will lose all saved progress after clicking them!!</span><br>
+                        -- Let me know if there are any problems or suggestions by email: <a href="mailto:mrbibbles3@gmail.com">MrBibbles3@gmail.com</a><br>
+                        -- Goodluck completing your Index!<br><br>
+                        -- Featured in my "Completing the Index" series <a href="">here</a>! 
+            </p> </p></div>
+
+            </div>
+            <div id="credits-section" class="nav-section">
+                <p class="nav-box">Created by:<br>
+                <a href="https://www.youtube.com/@MrBibbles3">MrBibbles!</a><br><br>
+                BETA Tester, Bug fixes, Mobile Testing, and SteveRaglanEnthusiast:<br>
+                <a href="https://www.youtube.com/@MrBibbles3">KevTsuboi!</a><br><br>
+                PC Testing:<br>
+                <a href="https://www.twitch.tv/rangawrath">RangaWrath! (twitch link)</a></p>
+            </div>
+            <div id="contact-section" class="nav-section">
+                <p class="nav-box">Contact me (MrBibbles) on Discord at mrhobobob or email me at <a href="mailto:mrbibbles3@gmail.com">MrBibbles3@gmail.com</a><br>
+                    I also have my YouTube channel here: <a href="https://www.youtube.com/@MrBibbles3">MrBibbles!</a> <br></p>
+            </div>
+        </div>
+
+        <div class="decorative-lines2">
+            <svg viewBox="0 0 540 20" xmlns="http://www.w3.org/2000/svg" class="wave-line">
+                <path d="M20 10 Q 70 0 120 10 T 220 10 T 320 10 T 420 10 T 520 10" stroke="#03AC13"  fill="transparent" stroke-width="10" stroke-linecap="round"/>
+            </svg>
+            
+            <a href="transferQuests.html" class="nav-button">~~~TRANSFER QUESTS!!~~~</a>
+            <svg viewBox="0 0 540 20" xmlns="http://www.w3.org/2000/svg" class="wave-line">
+                <path d="M20 10 Q 70 0 120 10 T 220 10 T 320 10 T 420 10 T 520 10" stroke="#03AC13"  fill="transparent" stroke-width="10" stroke-linecap="round"/>
+            </svg>
+        </div>
+
+
+        <div class="center-header">
+            <h1 class="header-units3">Story Mode</h1>
+        </div>
+        <div id="bossRaids" class="questChecklist">
+                <div class="quest-section">
+                    <ul class="quest-list">
+                        <li><label><input type="checkbox" data-id="q1"> Complete a game with 1 other person (2 total)</label></li>
+                        <li><label><input type="checkbox" data-id="q2"> Complete a game with 2 other people (3 total)</label></li>
+                        <li><label><input type="checkbox" data-id="q3"> Complete a game with 3 other people (4 total)</label></li>
+                        <li><label><input type="checkbox" data-id="q4"> Complete a level in game 5+ with 3 other people. Only equip 1 unit each.</label></li>
+                        <li><label><input type="checkbox" data-id="q5"> Complete a level under 5 minutes (7.2 is fastest)</label></li>
+                        <li><label><input type="checkbox" data-id="q6"> Win 250 times (7.2 is best)</label></li>
+                        <li><label><input type="checkbox" data-id="q7"> Game 1 in HELL MODE</label></li>
+                        <li><label><input type="checkbox" data-id="q8"> Game 2 in NIGHTMARE using only "Secret" Units</label></li>
+                        <li><label><input type="checkbox" data-id="q9"> Game 4 in NIGHTMARE using only "Secret" Units</label></li>
+                        <li><label><input type="checkbox" data-id="q10"> Game 5 in NIGHTMARE using only "Nightmare" Units</label></li>
+                        <li><label><input type="checkbox" data-id="q11"> Game 6 in NIGHTMARE with only 4 units equipped</label></li>
+                        <li><label><input type="checkbox" data-id="q12"> Game 7 in HELL MODE</label></li>
+                        <li><label><input type="checkbox" data-id="q13"> Game 8 in HELL MODE</label></li>
+                        <li><label><input type="checkbox" data-id="q14"> Game 9 in HELL MODE</label></li>
+
+                    </ul>
+                </div>
+            </div>
+
+
+
+        <div class="center-header">
+            <h1 class="header-units3">Boss Raids</h1>            
+        </div>
+        <div id="bossRaids" class="questChecklist">
+                <div class="quest-section">
+                    <ul class="quest-list">
+                        <li><label><input type="checkbox" data-id="q15"> Wave 100 in Boss raid</label></li>
+                        <li><label><input type="checkbox" data-id="q16"> Wave 150 in Boss raid</label></li>
+                        <li><label><input type="checkbox" data-id="q17"> Wave 200 in Boss raid</label></li>
+                    </ul>
+                </div>
+            </div>
+
+            
+        <div class="center-header">
+            <h1 class="header-units3">Night Shift</h1>            
+        </div>
+        <div id="bossRaids" class="questChecklist">
+                <div class="quest-section">
+                    <ul class="quest-list">
+                        <li><label><input type="checkbox" data-id="q18"> Complete Night Shift with more than 20% power</label></li>
+                        <li><label><input type="checkbox" data-id="q19"> Complete Night Shift with more than 40% power</label></li>
+                        <li><label><input type="checkbox" data-id="q20"> Complete Night Shift with more than 60% power</label></li>
+                    </ul>
+                </div>
+        </div>
+
+        
+        <div class="center-header">
+            <h1 class="header-units3">Summons</h1>            
+        </div>
+        <div id="bossRaids" class="questChecklist">
+                <div class="quest-section">
+                    <ul class="quest-list">
+                        <li><label><input type="checkbox" data-id="q21"> Summon a nightmare</label></li>
+                        <li><label><input type="checkbox" data-id="q21"> Have 300 Uncommon-Secret units in inventory</label></li>
+                        <li> (must be summon units, can also be from story-mode presents)</li>
+                        <li><label><input type="checkbox" data-id="q23"> Open 35k presents (this is getting nerfed)</label></li>
+                    </ul>
+                </div>
+        </div>
+
+        <div class="center-header">
+            <h1 class="header-units3">Unit Workshop</h1>            
+        </div>
+        <div id="bossRaids" class="questChecklist">
+                <div class="quest-section">
+                    <ul class="quest-list">
+                        <li><label><input type="checkbox" data-id="q24"> Evolve 50 (evolve 50 Chica/Freddys with pizza)</label></li>
+                        <li><label><input type="checkbox" data-id="q25"> Enchant 100k times (100k souls)</label></li>
+                        <li><label><input type="checkbox" data-id="q26"> Roll 0.1% enchant (or lower) 10x</label></li>
+                        <li>^^Shadow (easiest), Overclocked, Springlock, Vengeance^^</li>
+
+                    </ul>
+                </div>
+        </div>
+
+        <div class="center-header">
+            <h1 class="header-units3">Prize Corner</h1>            
+        </div>
+        <div id="bossRaids" class="questChecklist">
+                <div class="quest-section">
+                    <ul class="quest-list">
+                        <li><label><input type="checkbox" data-id="q27"> Purchase a unit from the merchant</label></li>
+                        <li><label><input type="checkbox" data-id="q28"> Salvage 10k items</label></li>
+                        <li><label><input type="checkbox" data-id="q29"> Spend 500k Tokens</label></li>
+
+                    </ul>
+                </div>
+        </div>
+
+        <div class="center-header">
+            <h1 class="header-units3">Other</h1>            
+        </div>
+        <div id="bossRaids" class="questChecklist">
+                <div class="quest-section">
+                    <ul class="quest-list">
+                        <li><label><input type="checkbox" data-id="q30"> Spend 500M money (bugged)</label></li>
+                        <li><label><input type="checkbox" data-id="q31"> Sell 65 items in trading</label></li>
+                        <li><label><input type="checkbox" data-id="q32"> Trade 25 times</label></li>
+                        <li><label><input type="checkbox" data-id="q33"> Get 250 ELO gained/lost in PVP</label></li>
+                        <li><label><input type="checkbox" data-id="q34"> Equip 1 units Starting with "d"</label></li>
+                        <li><label><input type="checkbox" data-id="q35"> Equip 2 units Starting with "t"</label></li>
+                        <li><label><input type="checkbox" data-id="q36"> Equip 3 units Starting with "n"</label></li>
+                        <li><label><input type="checkbox" data-id="q37"> Equip 4 units Starting with "f"</label></li>
+                        <li><label><input type="checkbox" data-id="q38"> Complete the Battle Pass</label></li>
+                        <li><label><input type="checkbox" data-id="q39"> Spend 2 hours in AFK</label></li>
+                        <li><label><input type="checkbox" data-id="q40"> Claim all 7 days in Login</label></li>
+                    </ul>
+                </div>
+        </div>
+    
+    </div>
+    <div class="toplot2 desktop-only">
+        <button class="back-to-top" id="backToTopBtn"> <b>Back to Top</b></button>
+        <button class="back-to-bottom" id="backToBottomBtn"> <b>Back to Bottom</b></button>
+        <div class="decorative-lines2">
+            <svg viewBox="0 0 540 20" xmlns="http://www.w3.org/2000/svg" class="wave-line">
+                <path d="M20 10 Q 70 0 120 10 T 220 10 T 320 10 T 420 10 T 520 10" stroke="#03AC13"  fill="transparent" stroke-width="10" stroke-linecap="round"/>
+            </svg>
+        </div>
+    </div>
+    <div class="toplot mobile-only">
+        <button class="back-to-top-Mobile" id="topMobile"> <b>Back to Top</b></button>
+        <button class="back-to-bottom-Mobile" id="bottomMobile"> <b>Back to Bottom</b></button>
+        <div class="decorative-lines mobile-only">
+            <svg viewBox="0 0 540 20" xmlns="http://www.w3.org/2000/svg" class="wave-line">
+                <path d="M20 10 Q 70 0 120 10 T 220 10 T 320 10 T 420 10 T 520 10" stroke="#03AC13"  fill="transparent" stroke-width="10" stroke-linecap="round"/>
+            </svg>
+             
+        </div>
+        <div class="empty-Mobile"></div> 
+    </div>
+
+        <div id="confirmModal" class="modal">
+    <div class="modal-content">
+        <p id="confirmMessage">Are you sure?</p>
+        <div class="modal-buttons">
+        <button id="confirmYes">Yes</button>
+        <button id="confirmNo">No</button>
+        </div>
+    </div>
+
+
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+    <script src="NewIndex.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    
+
+
+</body>
+</html>

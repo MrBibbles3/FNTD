@@ -144,9 +144,13 @@ function setupAllImages() {
 
   // 2️⃣ Click handlers
   setupImageClickHandlers();
+  setupQuestCheckboxHandlers();
 
+  
   // 3️⃣ Buttons
   setupButtons();
+
+  
 
   // 4️⃣ Update progress bar
   updateProgressCounter();
@@ -226,6 +230,14 @@ function getLocalChecklistState() {
     const val = localStorage.getItem(`checked-${id}`);
     state[id] = (val === 'true');
   });
+
+  const quests = document.querySelectorAll('.quest-list input[type="checkbox"]');
+  quests.forEach(cb => {
+    const id = cb.dataset.id;
+    const val = localStorage.getItem(`checked-${id}`);
+    state[id] = (val === 'true');
+  });
+
   return state;
 }
 
@@ -297,6 +309,17 @@ function applyChecklistState(state) {
       localStorage.setItem(`checked-${id}`, "false");
     }
   });
+
+   // Handle quest checkboxes
+  const quests = document.querySelectorAll('.quest-list input[type="checkbox"]');
+  quests.forEach(cb => {
+    const id = cb.dataset.id;
+    if (id in state) {
+      cb.checked = !!state[id];
+      localStorage.setItem(`checked-${id}`, state[id] ? "true" : "false");
+    }
+  });
+
   updateProgressCounter();
 }
 
@@ -469,6 +492,8 @@ document.addEventListener('DOMContentLoaded', () => {
         loadShinyUnits();
     }
 
+    setupQuestCheckboxes();
+
 });
 
 
@@ -589,4 +614,46 @@ function setupEasterEgg() {
             canvas.style.display = 'none';
         }, 3000);
     }
+}
+function setupQuestCheckboxes() {
+  const checkboxes = document.querySelectorAll('.quest-list input[type="checkbox"]');
+
+  // Load saved state (from localStorage, and Firestore if signed in)
+  checkboxes.forEach(cb => {
+    const id = cb.dataset.id;
+    const saved = localStorage.getItem(`checked-${id}`);
+    cb.checked = (saved === "true");
+
+    cb.addEventListener("change", async () => {
+      localStorage.setItem(`checked-${id}`, cb.checked ? "true" : "false");
+
+      if (currentUser) {
+        const updatedState = getLocalChecklistState(); // reuses your helper
+        await saveChecklistToFirestore(updatedState);
+      }
+    });
+  });
+}
+
+function setupQuestCheckboxHandlers() {
+  const quests = document.querySelectorAll('.quest-list input[type="checkbox"]');
+
+  quests.forEach(cb => {
+    cb.addEventListener('change', async () => {
+      const id = cb.dataset.id;
+      const isChecked = cb.checked;
+
+      // Save locally
+      localStorage.setItem(`checked-${id}`, isChecked ? 'true' : 'false');
+
+      // Update progress bar
+      updateProgressCounter();
+
+      // Save to Firestore if signed in
+      if (currentUser) {
+        const updatedState = getLocalChecklistState(); // includes images + quest checkboxes
+        await saveChecklistToFirestore(updatedState);
+      }
+    });
+  });
 }
