@@ -204,7 +204,9 @@
     { "id": "104", "class": "secret" },
     { "id": "105", "class": "secret" },
     { "id": "106", "class": "secret" },
-    { "id": "107", "class": "secret" }
+    { "id": "107", "class": "secret" },
+    { "id": "108", "class": "secret" },
+    { "id": "109", "class": "secret" }
   ],
 
   "nightmareUnits": [
@@ -313,7 +315,8 @@
     { "id": "103", "class": "nightmare" },
     { "id": "104", "class": "nightmare" },
     { "id": "105", "class": "nightmare" },
-    { "id": "106", "class": "nightmare" }
+    { "id": "106", "class": "nightmare" },
+    { "id": "107", "class": "nightmare" }
   ],
 
   
@@ -341,7 +344,10 @@
     { "id": "21", "class": "apex" },
     { "id": "22", "class": "apex" },
     { "id": "23", "class": "apex" },
-    { "id": "24", "class": "apex evolution" }
+    { "id": "24", "class": "apex evolution" },
+    { "id": "25", "class": "apex" },
+    { "id": "26", "class": "apex evolution" },
+    { "id": "27", "class": "apex evolution" }
   ],
   "forgottenUnits": [
     { "id": "1", "class": "forgotten" },
