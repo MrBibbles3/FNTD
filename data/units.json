@@ -130,7 +130,6 @@
     { "id": "30", "class": "secret" },
     { "id": "31", "class": "secret" },
     { "id": "32", "class": "secret" },
-    { "id": "33", "class": "secret" },
     { "id": "34", "class": "secret" },
     { "id": "35", "class": "secret" },
     { "id": "36", "class": "secret" },
@@ -151,7 +150,6 @@
     { "id": "52", "class": "secret" },
     { "id": "53", "class": "secret" },
     { "id": "54", "class": "secret" },
-    { "id": "55", "class": "secret" },
     { "id": "56", "class": "secret" },
     { "id": "57", "class": "secret" },
     { "id": "58", "class": "secret" },
@@ -317,7 +315,9 @@
     { "id": "106", "class": "nightmare" },
     { "id": "107", "class": "nightmare" },
     { "id": "108", "class": "nightmare" },
-    { "id": "109", "class": "nightmare" }
+    { "id": "109", "class": "nightmare" },
+    { "id": "110", "class": "nightmare" },
+    { "id": "111", "class": "nightmare" }
   ],
 
   
