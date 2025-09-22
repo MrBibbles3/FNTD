@@ -22,7 +22,8 @@
     { "id": "13", "class": "rare" },
     { "id": "14", "class": "rare" },
     { "id": "15", "class": "rare" },
-    { "id": "16", "class": "rare" }
+    { "id": "16", "class": "rare" },
+    { "id": "17", "class": "rare" }
   ],
 
   "epicUnits": [
@@ -125,7 +126,6 @@
     { "id": "25", "class": "secret" },
     { "id": "26", "class": "secret" },
     { "id": "27", "class": "secret" },
-    { "id": "28", "class": "secret" },
     { "id": "29", "class": "secret" },
     { "id": "30", "class": "secret" },
     { "id": "31", "class": "secret" },
@@ -140,7 +140,6 @@
     { "id": "40", "class": "secret" },
     { "id": "41", "class": "secret" },
     { "id": "42", "class": "secret" },
-    { "id": "43", "class": "secret" },
     { "id": "44", "class": "secret" },
     { "id": "45", "class": "secret" },
     { "id": "46", "class": "secret" },
@@ -316,7 +315,9 @@
     { "id": "104", "class": "nightmare" },
     { "id": "105", "class": "nightmare" },
     { "id": "106", "class": "nightmare" },
-    { "id": "107", "class": "nightmare" }
+    { "id": "107", "class": "nightmare" },
+    { "id": "108", "class": "nightmare" },
+    { "id": "109", "class": "nightmare" }
   ],
 
   
@@ -347,7 +348,7 @@
     { "id": "24", "class": "apex evolution" },
     { "id": "25", "class": "apex" },
     { "id": "26", "class": "apex evolution" },
-    { "id": "27", "class": "apex evolution" }
+    { "id": "27", "class": "apex" }
   ],
   "forgottenUnits": [
     { "id": "1", "class": "forgotten" },
