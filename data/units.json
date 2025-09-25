@@ -168,7 +168,6 @@
     { "id": "72", "class": "secret" },
     { "id": "73", "class": "secret" },
     { "id": "74", "class": "secret" },
-    { "id": "75", "class": "secret" },
     { "id": "76", "class": "secret" },
     { "id": "77", "class": "secret" },
     { "id": "78", "class": "secret" },
@@ -317,7 +316,8 @@
     { "id": "109", "class": "nightmare" },
     { "id": "110", "class": "nightmare" },
     { "id": "111", "class": "nightmare" },
-    { "id": "112", "class": "nightmare" }
+    { "id": "112", "class": "nightmare" },
+    { "id": "113", "class": "nightmare" }
   ],
 
   
