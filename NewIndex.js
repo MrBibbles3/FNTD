@@ -118,7 +118,10 @@ async function loadShinyUnits() {
                class="checkable"
                data-id="${uniqueId}"
                data-rarity="${unit.class}">
-          <div class="sparkle"></div>
+          <img src="https://drive.google.com/thumbnail?id=1miehYOyXMrn-EN-14ZeV73n6Xyl9vM50" class="sparkle1"> 
+          <img src="https://drive.google.com/thumbnail?id=1miehYOyXMrn-EN-14ZeV73n6Xyl9vM50" class="sparkle2"> 
+          <img src="https://drive.google.com/thumbnail?id=1miehYOyXMrn-EN-14ZeV73n6Xyl9vM50" class="sparkle3"> 
+          <img src="https://drive.google.com/thumbnail?id=1miehYOyXMrn-EN-14ZeV73n6Xyl9vM50" class="sparkle4">
           <svg class="tick" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path d="M20 6L9 17l-5-5" stroke="black" stroke-width="5" fill="none"
                     stroke-linecap="round" stroke-linejoin="round"/>
@@ -126,7 +129,7 @@ async function loadShinyUnits() {
                     stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         `;
-
+        
         container.appendChild(wrapper);
       });
     });
